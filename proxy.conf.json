@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+        "target": "https://tedd230.com/demo/",
+        "secure": false,
+        "pathRewrite": {
+            "^/api": ""
+        },
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Package Tracker
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar (ionChange)="findPackage($event)" value="1Z39R6879137146585"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="package">
+
+    <div class="milestones">
+      <div class="milestone" *ngFor="let milestone of package.milestones" [class.completed]="milestone.isCompleted" [class.current]="milestone.isCurrent">
+        <div class="circle"></div>
+        <div class="label"><b>{{ milestone.name }}</b></div>
+      </div>
+    </div>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>
+          <div class="label-container">
+            <h2>Podrobnosti sledování</h2>
+          </div>
+          <h3><b>{{ package.trackingNumber }}</b></h3>
+          <hr>
+          <div class="label-container" (click)="toggleDetails()">
+            <h2>Ukázat více</h2>
+            <ion-icon name="chevron-down-outline" slot="end" class="icon-right"></ion-icon>
+          </div>
+        </ion-label>
+      </ion-item-divider>
+      <div *ngIf="detailsVisible">
+        <ion-item>
+          <ion-label>
+            Adresa příjemce
+            <p>{{ package.shipToAddress.city }}, {{ package.shipToAddress.country }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Úroveň služby
+            <p>{{ package.additionalInformation.serviceInformation.serviceName }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Hmotnost
+            <p>{{ package.additionalInformation.weight }} {{ package.additionalInformation.weightUnit }}</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-item-group>
+    <h2 style="background-color: black; margin: O;">Naposledy naskenováno</h2>
+    <ion-list lines="none" style="padding: 0;">
+      <ion-item *ngFor="let activity of package.shipmentProgressActivities">
+        <ion-label>
+          <div>
+            <h2>{{ activity.date }} {{ activity.time }}</h2>
+          </div>
+          <div>
+            <h3><b>{{ activity.activityScan }}</b></h3>
+            <h4>{{ activity.location }}</h4>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "orbis",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
